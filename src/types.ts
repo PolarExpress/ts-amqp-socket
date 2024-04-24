@@ -1,6 +1,5 @@
 import amqp, { ConsumeMessage } from "amqplib";
 
-
 /**
  * Message contained in the header of the AMQP message, which corresponds with
  * the initial frontend request. Identical to the message contents when receiving
