@@ -6,7 +6,7 @@
  * (Department of Information and Computing Sciences)
  */
 
-import { AmqpSocket, createAmqpSocket } from "./amqp";
+import { AmqpSocket, createAmqpSocket } from "./src/amqp";
 
 export default {
   AmqpSocket,
