@@ -10,16 +10,6 @@ import { AmqpSocket, createAmqpSocket } from "./src/amqp";
 import { RoutingKeyStore, createRoutingKeyStore } from "./src/routingKeyStore";
 import { AmqpConfig, AuthHandler, Handler, SessionData } from "./src/types";
 
-export {
-  AmqpSocket,
-  createAmqpSocket,
-  RoutingKeyStore,
-  createRoutingKeyStore,
-}
+export { AmqpSocket, createAmqpSocket, RoutingKeyStore, createRoutingKeyStore };
 
-export type {
-  AmqpConfig,
-  SessionData,
-  Handler,
-  AuthHandler,
-}
+export type { AmqpConfig, SessionData, Handler, AuthHandler };
