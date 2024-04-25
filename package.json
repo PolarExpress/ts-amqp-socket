@@ -7,9 +7,10 @@
     "lint": "eslint .",
     "format": "prettier --write ."    
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "PolarExpress",
+  "license": "MIT",
+  "description": "An AMQP request-response adapter to the GraphPolaris AMQP architecture",
+  "repository": "github:PolarExpress/ts-amqp-socket",
   "dependencies": {
     "amqplib": "^0.10.4",
     "dotenv": "^16.4.5",

@@ -31,7 +31,10 @@ export interface AmqpResponse {
 }
 
 /**
- * An asynchronous pure data handler with authentication context
+ * An asynchronous pure data handler with authentication context.
+ * @param req The request body
+ * @param session The session data of the client
+ * @returns The response data
  */
 export type AuthHandler = (
   req: object,
@@ -39,7 +42,9 @@ export type AuthHandler = (
 ) => Promise<unknown>;
 
 /**
- * An asynchronous pure data handler
+ * An asynchronous pure data handler.
+ * @param req The request body
+ * @returns The response data
  */
 export type Handler = (req: object) => Promise<unknown>;
 
@@ -61,13 +66,13 @@ export interface SessionData {
  */
 export interface AmqpConfig {
   queue: {
-    /** name of the queue to consume messages from */
+    /** Name of the queue to consume messages from */
     request: string;
   };
   exchange: {
-    /** name of the exchange the request queue is bound to */
+    /** Name of the exchange the request queue is bound to */
     request: string;
-    /** name of the exchange to publish responses to */
+    /** Name of the exchange to publish responses to */
     response: string;
   };
   routingKey: {
@@ -109,5 +114,5 @@ export interface AmqpRequestBody {
 export interface PublishContext {
   routingKey: string;
   callID: string;
-  headers: amqp.MessagePropertyHeaders | undefined;
+  headers?: amqp.MessagePropertyHeaders;
 }

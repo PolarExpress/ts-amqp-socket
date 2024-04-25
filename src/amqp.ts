@@ -18,15 +18,17 @@ import {
   PublishContext
 } from "./types";
 import { panic } from "./utils";
+
 /**
  * ## AmqpSocket
  * AMQP connection wrapper for using request-response like endpoints over the
  * GraphPolaris AMQP architecture.
  *
- * ## Example usage
+ * ***
+ * ## Example
  * ```
  * const amqpConfig: AmqpConfig = {
- *   // ...
+ *   // (see AmqpConfig for more details)
  * };
  * const store = createRoutingKeyStore();
  * const amqp = await createAmqpSocket(amqpConfig, store);
@@ -38,7 +40,7 @@ import { panic } from "./utils";
  * amqp.listen();
  * ```
  */
-export class AmqpSocket {
+export class AmqpSocket {  
   private handlers: Record<string, AuthHandler> = {};
 
   public constructor(
@@ -59,15 +61,20 @@ export class AmqpSocket {
 
   /**
    * Registers a handler for a specific action.
-   * Handlers registered to "__default" will
+   * 
+   * Handlers registered to `"__default"` will be called when no action is 
+   * specified. Errors thrown by handlers will be caught and forwarded to the
+   * frontend as an error message.
    *
-   * ## Example usage
+   * ***
+   * ## Example
    * ```
    * amqp.handle("foo", (req, session) => {
    *   return { bar: "bar" };
    * });
-   *
    * ```
+   * ***
+   * 
    * @param key The action to register the handler for
    * @param handler The handler to register
    */
@@ -157,18 +164,24 @@ export class AmqpSocket {
         headers: message.properties.headers
       };
 
+      // if no action is specified and no __default handler exists, 
+      // return an error
       if (body.action == null && !("__default" in this.handlers)) {
         this.publishError(ctx, "No action specified");
         return;
-      }
-      body.action = "__default";
+      }      
+      // default action is __default
+      body.action ??= "__default";
 
+      // if the action doesn't exist, return an error
       if (!(body.action in this.handlers)) {
         this.publishError(ctx, `Action "${body.action}" doesn't exist`);
         return;
       }
+      
+      const handler = this.handlers[body.action];
 
-      const handler = this.handlers[body.action ?? ""];
+      // call the handler and publish the response
       try {
         const response = await handler(body, headerContent.sessionData);
         this.publishSuccess(ctx, response);
