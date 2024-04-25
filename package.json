@@ -1,13 +1,11 @@
 {
   "name": "ts-amqp-socket",
   "version": "1.0.0",
-  "main": "build/main.js",
-  "types": "build/main.d.ts",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "format": "prettier --write .",
-    "prepare": "tsc"
+    "format": "prettier --write ."    
   },
   "author": "",
   "license": "ISC",
