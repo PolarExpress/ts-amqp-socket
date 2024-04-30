@@ -58,6 +58,8 @@ const rule = {
 
 const plugin = { rules: { "enforce-copyright-comment": rule } };
 
+const compat = new FlatCompat();
+
 export default tseslint.config(
   {
     plugins: { custom: plugin },
