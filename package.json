@@ -1,12 +1,12 @@
 {
   "name": "ts-amqp-socket",
   "version": "1.0.0",
-  "main": "index.ts",
-  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",  
   "scripts": {
     "lint": "eslint .",
-    "format": "prettier --write .",
-    "type-check": "tsc --noEmit" 
+    "format": "prettier --write .",    
+    "prepare": "tsc"
   },
   "author": "PolarExpress",
   "license": "MIT",
