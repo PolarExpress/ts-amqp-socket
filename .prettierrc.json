@@ -5,5 +5,12 @@
   "singleQuote": false,
   "bracketSpacing": true,
   "bracketSameLine": true,
-  "arrowParens": "avoid"
+  "arrowParens": "avoid",
+
+  "plugins": ["prettier-plugin-jsdoc"],
+  "jsdocCommentLineStrategy": "multiline",
+  "jsdocDescriptionWithDot": true,
+  "jsdocKeepUnParseAbleExampleIndent": true,
+  "jsdocSeparateTagGroups": true,
+  "jsdocVerticalAlignment": true
 }

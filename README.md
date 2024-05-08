@@ -118,4 +118,3 @@ are defined in the AmqpConfig object.
 As of now, responses are automatically routed to the frontend using the routing
 key fetched from Redis. This behaviour should be encapsulated to make this 
 module more general-purpose.
-
