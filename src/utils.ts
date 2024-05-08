@@ -15,6 +15,7 @@ export class PanicError extends Error {
 
 /**
  * Throws a `PanicError` with the given message.
+ *
  * @param message - The message to include in the error.
  */
 export const panic = (message: string): never => {

@@ -8,4 +8,4 @@
 
 export { AmqpSocket, createAmqpSocket } from "./src/amqp";
 export { RoutingKeyStore, createRoutingKeyStore } from "./src/routingKeyStore";
-export { AmqpConfig, SessionData, Handler, AuthHandler } from "./src/types";
+export { AmqpConfig, AuthHandler, Handler, SessionData } from "./src/types";

@@ -7,11 +7,12 @@
  */
 
 import { createClient } from "redis";
+
 import { panic } from "./utils";
 
 /**
- * A store for getting routing keys from Redis.
- * Routing keys are used to route messages to the correct web socket.
+ * A store for getting routing keys from Redis. Routing keys are used to route
+ * messages to the correct web socket.
  */
 export class RoutingKeyStore {
   private redis: ReturnType<typeof createClient>;
@@ -20,17 +21,18 @@ export class RoutingKeyStore {
     this.redis = redis;
   }
 
-  async get(sessionID: string): Promise<string | null> {
+  async get(sessionID: string): Promise<string | undefined> {
     const redisResponse = await this.redis.get(`routing ${sessionID}`);
     if (!redisResponse) {
-      return null;
+      return;
     }
     return JSON.parse(redisResponse).QueueID;
   }
 }
 /**
- * Creates a new `RoutingKeyStore` for getting routing keys from Redis.
- * Routing keys are used to route messages to the correct web socket.
+ * Creates a new `RoutingKeyStore` for getting routing keys from Redis. Routing
+ * keys are used to route messages to the correct web socket.
+ *
  * @returns The created `RoutingKeyStore`
  */
 export async function createRoutingKeyStore() {
