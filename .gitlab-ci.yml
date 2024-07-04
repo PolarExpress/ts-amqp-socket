@@ -1,0 +1,52 @@
+stages:
+  - quality
+  - build
+
+cache:
+  key:
+    files:
+      - pnpm-lock.yaml
+  paths:
+    - .pnpm-store
+  policy: pull-push
+
+.setup_pnpm:
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@latest-9 --activate
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
+    - cp sample.env .env || true
+
+eslint:
+  stage: quality
+  image: node:21
+  extends: 
+    - .setup_pnpm
+  script:
+    - pnpm lint
+  cache:
+    policy: pull
+
+prettier:
+  stage: quality
+  image: node:21
+  extends: 
+    - .setup_pnpm
+  script:
+    - npx prettier --check .
+  cache:
+    policy: pull
+
+build:
+  stage: build
+  image: node:21
+  extends: 
+    - .setup_pnpm
+  script:
+    - pnpm prepare
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
